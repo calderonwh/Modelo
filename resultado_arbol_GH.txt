@@ -1,0 +1,1085 @@
+Árbol de directorios para: C:\Users\co_wacalderonh\source\repos\BackgroundServices
+================================================================================
+
+BackgroundServices
+├── .dockerignore
+├── BackgroundServices
+│   ├── .config
+│   │   └── dotnet-tools.json
+│   ├── BackgroundServices.csproj
+│   ├── BackgroundServices.http
+│   ├── Controllers
+│   │   ├── EmitirFEPosController.cs
+│   │   ├── GHController.cs
+│   │   ├── ListasRestrictivasController.cs
+│   │   ├── NotificacionWinnerNetController.cs
+│   │   └── OperacionesCajaController.cs
+│   ├── DashboardAuthorizationFilter.cs
+│   ├── Dockerfile
+│   ├── JobScheduler.cs
+│   ├── Program.cs
+│   ├── Properties
+│   │   └── launchSettings.json
+│   ├── Response.cs
+│   ├── Services
+│   │   ├── EmitirFEPosService.cs
+│   │   ├── GH.cs
+│   │   ├── ListasRestrictivasService.cs
+│   │   ├── NotificacionWinnerNetService.cs
+│   │   └── OperacionesCajaService.cs
+│   ├── UrlAppsConfig.cs
+│   ├── appsettings.Development.json
+│   └── appsettings.json
+├── BackgroundServices.sln
+├── azure-pipelines-1.yml
+└── azure-pipelines.yml
+
+
+Rutas + contenido (solo archivos de texto / extensiones permitidas)
+================================================================================
+
+================================================================================
+[1] BackgroundServices\.config\dotnet-tools.json
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\.config\dotnet-tools.json
+--------------------------------------------------------------------------------
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {}
+}
+
+================================================================================
+[2] BackgroundServices\Controllers\EmitirFEPosController.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Controllers\EmitirFEPosController.cs
+--------------------------------------------------------------------------------
+﻿using BackgroundServices.Services;
+using Hangfire;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BackgroundServices.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmitirFEPosController : ControllerBase
+    {
+        private readonly EmitirFEPosService _emitirFEPosService;
+
+        public EmitirFEPosController(EmitirFEPosService emitirFEPosService)
+        {
+            _emitirFEPosService = emitirFEPosService;
+        }
+
+        /// <summary>
+        /// TestEmitirFEPos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("TestEmitirFEPos")]
+        public async Task<Response> TestEmitirFEPos()
+        {
+            return await _emitirFEPosService.TestEmitirFEPos();
+        }
+
+        /// <summary>
+        /// ExecEmitirFEPos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ExecEmitirFEPos")]
+        public async Task<Response> ExecEmitirFEPos()
+        {
+            var output = await _emitirFEPosService.ExecEmitirFEPos();
+            return output;
+        }
+        /// <summary>
+        /// ExecDescargarFEPos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ExecDescargarFEPos")]
+        public async Task<Response> ExecDescargarFEPos()
+        {
+            var output = await _emitirFEPosService.ExecDescargarFEPos();
+            return output;
+        }
+        /// <summary>
+        /// ExecImprimirFEPos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ExecImprimirFEPos")]
+        public async Task<Response> ExecImprimirFEPos()
+        {
+            return await _emitirFEPosService.ExecImprimirFEPos();
+        }
+        /// <summary>
+        /// ExecEmitirErroneasFEPos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ExecEmitirErroneasFEPos")]
+        public async Task<Response> ExecEmitirErroneasFEPos()
+        {
+            return await _emitirFEPosService.ExecEmitirErroneasFEPos();
+        }
+    }
+}
+
+================================================================================
+[3] BackgroundServices\Controllers\GHController.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Controllers\GHController.cs
+--------------------------------------------------------------------------------
+﻿using BackgroundServices.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BackgroundServices.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class GHController : ControllerBase
+    {
+        private readonly GH _gh;
+
+        public GHController(GH gh)
+        {
+            _gh = gh;
+        }
+
+        /// <summary>
+        /// TestPropinaGH
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("TestPropinaGH")]
+        public async Task<Response> TestPropinaGH()
+        {
+            return await _gh.TestPropinaGH();
+        }
+
+
+        /// <summary>
+        /// CargaPropinaGH
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("CargaPropinaGH")]
+        public async Task<Response> CargaPropinaGH()
+        {
+            return await _gh.CargaPropinaGH();
+        }
+    }
+}
+
+================================================================================
+[4] BackgroundServices\Controllers\ListasRestrictivasController.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Controllers\ListasRestrictivasController.cs
+--------------------------------------------------------------------------------
+﻿using BackgroundServices.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BackgroundServices.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ListasRestrictivasController : ControllerBase
+    {
+        private readonly ListasRestrictivasService _listasRestrictivasService;
+
+        public ListasRestrictivasController(ListasRestrictivasService listasRestrictivasService)
+        {
+            _listasRestrictivasService = listasRestrictivasService;
+        }
+
+        /// <summary>
+        /// TestListasRestrictivas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("TestListasRestrictivas")]
+        public async Task<Response> TestListasRestrictivas()
+        {
+            return await _listasRestrictivasService.TestListasRestrictivas();
+        }
+
+
+        /// <summary>
+        /// DescargarPaginaWebRequest
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("DescargarPaginaWebRequest")]
+        public async Task<Response> DescargarPaginaWebRequest()
+        {
+            return await _listasRestrictivasService.DescargarPaginaWebRequest();
+        }
+    }
+}
+
+================================================================================
+[5] BackgroundServices\Controllers\NotificacionWinnerNetController.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Controllers\NotificacionWinnerNetController.cs
+--------------------------------------------------------------------------------
+﻿using BackgroundServices.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BackgroundServices.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class NotificacionWinnerNetController : ControllerBase
+    {
+        private readonly NotificacionWinnerNetService _notificacionWinnerNetService;
+
+        public NotificacionWinnerNetController(NotificacionWinnerNetService notificacionWinnerNetService)
+        {
+            _notificacionWinnerNetService = notificacionWinnerNetService;
+        }
+
+        /// <summary>
+        /// TestNotificacionWinnerNet
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("TestNotificacionWinnerNet")]
+        public async Task<Response> TestNotificacionWinnerNet()
+        {
+            return await _notificacionWinnerNetService.TestNotificacionWinnerNet();
+        }
+
+
+        /// <summary>
+        /// ExecNotificacionWinnerNet
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ExecNotificacionWinnerNet")]
+        public async Task<Response> ExecNotificacionWinnerNet()
+        {
+            return await _notificacionWinnerNetService.ExecNotificacionWinnerNet();
+        }
+    }
+}
+
+================================================================================
+[6] BackgroundServices\Controllers\OperacionesCajaController.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Controllers\OperacionesCajaController.cs
+--------------------------------------------------------------------------------
+﻿using BackgroundServices.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BackgroundServices.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OperacionesCajaController : ControllerBase
+    {
+        private readonly OperacionesCajaService _operacionesCajaService;
+
+        public OperacionesCajaController(OperacionesCajaService operacionesCajaService)
+        {
+            _operacionesCajaService = operacionesCajaService;
+        }
+
+        /// <summary>
+        /// TestOperacionesCaja
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("TestOperacionesCaja")]
+        public async Task<Response> TestOperacionesCaja()
+        {
+            return await _operacionesCajaService.TestOperacionesCaja();
+        }
+
+
+        /// <summary>
+        /// ExecOperacionesCaja
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("ExecOperacionesCaja")]
+        public async Task<Response> ExecOperacionesCaja()
+        {
+            return await _operacionesCajaService.ExecOperacionesCaja();
+        }
+    }
+}
+
+================================================================================
+[7] BackgroundServices\DashboardAuthorizationFilter.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\DashboardAuthorizationFilter.cs
+--------------------------------------------------------------------------------
+﻿using Hangfire.Dashboard;
+
+namespace BackgroundServices
+{
+    public class DashboardAuthorizationFilter : IDashboardAuthorizationFilter
+    {
+        public bool Authorize(DashboardContext context)
+        {
+            // Aquí puedes implementar la lógica para permitir el acceso.
+            // Por ejemplo, puedes verificar si el usuario está autenticado:
+            return true; // Cambia esto a tu lógica de autorización.
+        }
+    }
+}
+
+================================================================================
+[8] BackgroundServices\JobScheduler.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\JobScheduler.cs
+--------------------------------------------------------------------------------
+﻿using BackgroundServices.Controllers;
+using BackgroundServices.Services;
+using Hangfire;
+
+namespace BackgroundServices
+{
+    public static class JobScheduler
+    {
+        
+        public static void ConfigureJobs()
+        {
+            TimeZoneInfo bogotaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SA Pacific Standard Time");
+            // Programar trabajos recurrentes
+
+            //Test de ejecucion
+            RecurringJob.AddOrUpdate<GHController>("TestPropinaGH", t => t.TestPropinaGH(), Cron.Yearly, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Carga de propinas
+            //Se ejecuta los días 5 de cada mes a las 12 del medio día
+            RecurringJob.AddOrUpdate<GHController>("CargaPropinaGH", t => t.CargaPropinaGH(), "0 12 5 * *", new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Test de ejecucion
+            RecurringJob.AddOrUpdate<ListasRestrictivasController>("TestListasRestrictivas", t => t.TestListasRestrictivas(), Cron.Yearly, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Descarga de archivo de listas restrictivas
+            //Se ejecuta dariamente a las 12 del medio día
+            //RecurringJob.AddOrUpdate<ListasRestrictivasController>("DescargarPaginaWebRequest", t => t.DescargarPaginaWebRequest(), "0 12 * * *", new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Test de ejecucion
+            RecurringJob.AddOrUpdate<NotificacionWinnerNetController>("TestNotificacionWinnerNet", t => t.TestNotificacionWinnerNet(), Cron.Yearly, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Descarga de archivo de listas restrictivas
+            //Se ejecuta dariamente a la 1 pm
+            //RecurringJob.AddOrUpdate<NotificacionWinnerNetController>("ExecNotificacionWinnerNet", t => t.ExecNotificacionWinnerNet(), "0 13 * * *", new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Test de ejecucion
+            RecurringJob.AddOrUpdate<OperacionesCajaController>("TestOperacionesCaja", t => t.TestOperacionesCaja(), Cron.Yearly, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            //Ejecuta las operaciones de caja
+            //Se ejecuta dariamente a la 1 pm
+            //RecurringJob.AddOrUpdate<OperacionesCajaController>("ExecOperacionesCaja", t => t.ExecOperacionesCaja(), "0 12 * * *", new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            ////Test de ejecucion
+            //RecurringJob.AddOrUpdate<EmitirFEPosController>("TestEmitirFEPos", t => t.TestEmitirFEPos(), Cron.Yearly, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            ////Ejecuta la Trasnmision de FE POS
+            ////Se ejecuta cada min
+            //RecurringJob.AddOrUpdate<EmitirFEPosController>("ExecEmitirFEPos", t => t.ExecEmitirFEPos(), Cron.Minutely, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            ////Ejecuta la Descarga de FE POS
+            ////Se ejecuta cada min
+            //RecurringJob.AddOrUpdate<EmitirFEPosController>("ExecDescargarFEPos", t => t.ExecDescargarFEPos(), Cron.Minutely, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            ////Ejecuta la Impresion de FE POS
+            ////Se ejecuta cada min
+            //RecurringJob.AddOrUpdate<EmitirFEPosController>("ExecImprimirFEPos", t => t.ExecImprimirFEPos(), Cron.Minutely, new RecurringJobOptions { TimeZone = bogotaTimeZone });
+
+            ////Ejecuta el Reenvio de Facturas erroneas de FE POS
+            ////Se ejecuta cada Hora
+            //RecurringJob.AddOrUpdate<EmitirFEPosService>("ExecEmitirErroneasFEPos", t => t.ExecEmitirErroneasFEPos(), "*/30 * * * *", new RecurringJobOptions { TimeZone = bogotaTimeZone });
+        }
+    }
+}
+
+================================================================================
+[9] BackgroundServices\Program.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Program.cs
+--------------------------------------------------------------------------------
+using BackgroundServices;
+using BackgroundServices.Controllers;
+using BackgroundServices.Services;
+using Hangfire;
+using Hangfire.Dashboard;
+using Microsoft.Extensions.Options;
+using System.Security.Authentication;
+using TH.Hangfire.Oracle;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+// Registrar la configuraci�n en el contenedor
+builder.Services.Configure<UrlAppsConfig>(builder.Configuration.GetSection("UrlApps"));
+
+// Registrar la clase como un singleton para inyecci�n directa
+builder.Services.AddSingleton(sp => sp.GetRequiredService<IOptions<UrlAppsConfig>>().Value);
+
+builder.Services.AddScoped<GH>();
+builder.Services.AddScoped<ListasRestrictivasService>();
+builder.Services.AddScoped<NotificacionWinnerNetService>();
+builder.Services.AddScoped<OperacionesCajaService>();
+builder.Services.AddTransient<EmitirFEPosService>();
+builder.Services.AddScoped<GHController>();
+builder.Services.AddScoped<ListasRestrictivasController>();
+builder.Services.AddScoped<NotificacionWinnerNetController>();
+builder.Services.AddScoped<OperacionesCajaController>();
+//builder.Services.AddScoped<EmitirFEPosController>();
+
+builder.Services.AddControllers();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddOpenApi();
+
+
+// Registrar Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Mi API",
+        Version = "v1",
+        Description = "Descripci�n de la API"
+    });
+});
+
+// Registrar HttpClient con el nombre "MiApiClient"
+var handler = new SocketsHttpHandler
+{
+    SslOptions = new System.Net.Security.SslClientAuthenticationOptions
+    {
+        EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12
+    }
+};
+
+builder.Services.AddHttpClient("MiApiClient", client =>
+{
+    client.BaseAddress = new Uri("https://localhost:44329");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+    client.Timeout = TimeSpan.FromMinutes(30);
+})
+    .ConfigurePrimaryHttpMessageHandler(() =>
+            new SocketsHttpHandler
+            {
+                SslOptions = new System.Net.Security.SslClientAuthenticationOptions
+                {
+                    EnabledSslProtocols = SslProtocols.Tls12,
+                    RemoteCertificateValidationCallback = (sender, cert, chain, sslPolicyErrors) => true // Permite cualquier certificado
+                }
+            });
+
+//Configuracion de Hangfire con Oracle
+string connectionStringHangfire = builder.Configuration.GetConnectionString("HangfireConnection");
+builder.Services.AddHangfire(config => config
+    .UseStorage(new OracleStorage(connectionStringHangfire)));
+
+//var options = new BackgroundJobServerOptions
+//{
+//    HeartbeatInterval = TimeSpan.FromSeconds(30),  // Ajusta seg�n sea necesario
+//    ServerCheckInterval = TimeSpan.FromSeconds(30)
+//};
+
+builder.Services.AddHangfireServer();
+//builder.Services.AddHangfireServer(option =>
+//{
+//    option.Queues = new[] { "default", "fe" };
+//});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+}
+
+// Habilitar Swagger y la interfaz de Swagger UI
+app.UseSwagger();
+
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mi API v1");
+    c.RoutePrefix = string.Empty; // Para que Swagger UI est� en la ra�z (http://localhost:5000)
+});
+
+//BackgroundJob.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+
+app.UseHangfireDashboard("/hangfire", new DashboardOptions
+{
+    DisplayStorageConnectionString = false,
+    DarkModeEnabled = true,
+    DashboardTitle = "Winner Servicios",
+    Authorization = new[] { new DashboardAuthorizationFilter() }
+});
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.UseRouting();
+
+JobScheduler.ConfigureJobs();
+
+app.Run();
+
+================================================================================
+[10] BackgroundServices\Properties\launchSettings.json
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Properties\launchSettings.json
+--------------------------------------------------------------------------------
+{
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5173"
+    },
+    "https": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7102;http://localhost:5173"
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "ASPNETCORE_HTTPS_PORTS": "8081",
+        "ASPNETCORE_HTTP_PORTS": "8080"
+      },
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:60179/",
+      "sslPort": 44361
+    }
+  }
+}
+
+================================================================================
+[11] BackgroundServices\Response.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Response.cs
+--------------------------------------------------------------------------------
+﻿namespace BackgroundServices
+{
+    public class Response
+    {
+        public bool success { get; set; }
+        public bool error { get; set; }
+        public string message { get; set; }
+        public dynamic result { get; set; }
+    }
+}
+
+================================================================================
+[12] BackgroundServices\Services\EmitirFEPosService.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Services\EmitirFEPosService.cs
+--------------------------------------------------------------------------------
+﻿using Hangfire;
+using System.Net.Http;
+using System.Text.Json;
+
+namespace BackgroundServices.Services
+{
+    public class EmitirFEPosService
+    {
+        private HttpClient _httpClient;
+        private readonly UrlAppsConfig _urlAppsConfig;
+
+        public EmitirFEPosService(UrlAppsConfig urlAppsConfig)
+        {
+            //_httpClient = httpClientFactory.CreateClient("FEClient")16161il
+            _urlAppsConfig = urlAppsConfig;
+        }
+        public async Task<Response> TestEmitirFEPos()
+        {
+            try
+            {
+                _httpClient = new HttpClient();
+                _httpClient.BaseAddress = new Uri(_urlAppsConfig.Service_FE_POS);
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_FE_POS}EmitirFEPos/TestEmitirFEPos");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de EmitirFEPos" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+
+        public async Task<Response> ExecEmitirFEPos()
+        {
+            try
+            {
+                _httpClient = new HttpClient();
+                _httpClient.BaseAddress = new Uri(_urlAppsConfig.Service_FE_POS);
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_FE_POS}EmitirFEPos/ExecEmitirFEPos");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de EmitirFEPos" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+        public async Task<Response> ExecDescargarFEPos()
+        {
+            try
+            {
+                _httpClient = new HttpClient();
+                _httpClient.BaseAddress = new Uri(_urlAppsConfig.Service_FE_POS);
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_FE_POS}EmitirFEPos/ExecDescargarFEPos");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de EmitirFEPos" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+        public async Task<Response> ExecImprimirFEPos()
+        {
+            try
+            {
+                _httpClient = new HttpClient();
+                _httpClient.BaseAddress = new Uri(_urlAppsConfig.Service_FE_POS);
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_FE_POS}EmitirFEPos/ExecImprimirFEPos");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de EmitirFEPos" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+        public async Task<Response> ExecEmitirErroneasFEPos()
+        {
+            try
+            {
+                _httpClient = new HttpClient();
+                _httpClient.BaseAddress = new Uri(_urlAppsConfig.Service_FE_POS);
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_FE_POS}EmitirFEPos/ExecEmitirErroneasFEPos");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de EmitirFEPos" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+
+    }
+}
+
+================================================================================
+[13] BackgroundServices\Services\GH.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Services\GH.cs
+--------------------------------------------------------------------------------
+﻿using System.Net.Http;
+using System.Text.Json;
+
+namespace BackgroundServices.Services
+{
+    public class GH
+    {
+        private HttpClient _httpClient;
+        private readonly UrlAppsConfig _urlAppsConfig;
+
+        public GH(IHttpClientFactory httpClientFactory, UrlAppsConfig urlAppsConfig)
+        {
+
+            _httpClient = httpClientFactory.CreateClient();
+            _urlAppsConfig = urlAppsConfig;
+        }
+
+        public async Task<Response> CargaPropinaGH()
+        {
+            try
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                _httpClient = new HttpClient(clientHandler);
+
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Services_GH_Propinas}PropinaGH/CargaPropinaGH");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de propinas GH" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+
+
+        public async Task<Response> TestPropinaGH()
+        {
+            try
+            {
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                _httpClient = new HttpClient(clientHandler);
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Services_GH_Propinas}PropinaGH/TestPropinaGH");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de propinas GH" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+    }
+}
+
+================================================================================
+[14] BackgroundServices\Services\ListasRestrictivasService.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Services\ListasRestrictivasService.cs
+--------------------------------------------------------------------------------
+﻿using System.Text.Json;
+
+namespace BackgroundServices.Services
+{
+    public class ListasRestrictivasService
+    {
+        private readonly HttpClient _httpClient;
+        private readonly UrlAppsConfig _urlAppsConfig;
+
+        public ListasRestrictivasService(IHttpClientFactory httpClientFactory, UrlAppsConfig urlAppsConfig)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _urlAppsConfig = urlAppsConfig;
+        }
+
+        public async Task<Response> TestListasRestrictivas()
+        {
+            try
+            {
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_Siplaft_ListasRestrictivas}ListasRestrictivas/TestListasRestrictivas");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de ListasRestrictivas" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+
+        public async Task<Response> DescargarPaginaWebRequest()
+        {
+            try
+            {
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_Siplaft_ListasRestrictivas}ListasRestrictivas/DescargarPaginaWebRequest");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de ListasRestrictivas" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+    }
+}
+
+================================================================================
+[15] BackgroundServices\Services\NotificacionWinnerNetService.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Services\NotificacionWinnerNetService.cs
+--------------------------------------------------------------------------------
+﻿using System.Text.Json;
+
+namespace BackgroundServices.Services
+{
+    public class NotificacionWinnerNetService
+    {
+        private readonly HttpClient _httpClient;
+        private readonly UrlAppsConfig _urlAppsConfig;
+
+        public NotificacionWinnerNetService(IHttpClientFactory httpClientFactory, UrlAppsConfig urlAppsConfig)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _urlAppsConfig = urlAppsConfig;
+        }
+
+        public async Task<Response> TestNotificacionWinnerNet()
+        {
+            try
+            {
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_Siplaft_ListasRestrictivasNotificacion}NotificacionWinnerNet/TestNotificacionWinnerNet");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de NotificacionWinnerNet" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+
+        public async Task<Response> ExecNotificacionWinnerNet()
+        {
+            try
+            {
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_Siplaft_ListasRestrictivasNotificacion}NotificacionWinnerNet/ExecNotificacionWinnerNet");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de NotificacionWinnerNet" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+    }
+}
+
+================================================================================
+[16] BackgroundServices\Services\OperacionesCajaService.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\Services\OperacionesCajaService.cs
+--------------------------------------------------------------------------------
+﻿using System.Text.Json;
+
+namespace BackgroundServices.Services
+{
+    public class OperacionesCajaService
+    {
+        private readonly HttpClient _httpClient;
+        private readonly UrlAppsConfig _urlAppsConfig;
+
+        public OperacionesCajaService(IHttpClientFactory httpClientFactory, UrlAppsConfig urlAppsConfig)
+        {
+            _httpClient = httpClientFactory.CreateClient();
+            _urlAppsConfig = urlAppsConfig;
+        }
+
+        public async Task<Response> TestOperacionesCaja()
+        {
+            try
+            {
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_Siplaft_Operaciones}OperacionesCaja/TestOperacionesCaja");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de OperacionesCaja" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+
+        public async Task<Response> ExecOperacionesCaja()
+        {
+            try
+            {
+                var output = await _httpClient.GetAsync($"{_urlAppsConfig.Service_Siplaft_Operaciones}OperacionesCaja/ExecOperacionesCaja");
+                output.EnsureSuccessStatusCode();
+                var json = await output.Content.ReadAsStringAsync();
+
+                return JsonSerializer.Deserialize<Response>(json) ?? new Response { error = false, success = false, message = "No se pudo deserializar la respuesta del servicio de OperacionesCaja" };
+            }
+            catch (Exception ex)
+            {
+                return new Response { error = true, success = false, message = ex.Message, result = ex };
+            }
+        }
+    }
+}
+
+================================================================================
+[17] BackgroundServices\UrlAppsConfig.cs
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\UrlAppsConfig.cs
+--------------------------------------------------------------------------------
+﻿namespace BackgroundServices
+{
+    public class UrlAppsConfig
+    {
+        public string Service_FE_MICROS { get; set; }
+        public string Service_FE_Notificacion { get; set; }
+        public string Service_FE_POS { get; set; }
+        public string Service_Siplaft_ListasRestrictivas { get; set; }
+        public string Service_Siplaft_ListasRestrictivasNotificacion { get; set; }
+        public string Service_Siplaft_Operaciones { get; set; }
+        public string Services_GH_Propinas { get; set; }
+    }
+}
+
+================================================================================
+[18] BackgroundServices\appsettings.Development.json
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\appsettings.Development.json
+--------------------------------------------------------------------------------
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
+
+================================================================================
+[19] BackgroundServices\appsettings.json
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\BackgroundServices\appsettings.json
+--------------------------------------------------------------------------------
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+
+  "UrlApps": {
+    "Service_FE_MICROS": null,
+    "Service_FE_Notificacion": null,
+    "Service_FE_POS": null,
+    "Service_Siplaft_ListasRestrictivas": null,
+    "Service_Siplaft_ListasRestrictivasNotificacion": null,
+    "Service_Siplaft_Operaciones": null,
+    "Services_GH_Propinas": "http://10.112.105.62/api/"
+  },
+  "ConnectionStrings": {
+    "HangfireConnection": ""
+    
+  }
+}
+
+================================================================================
+[20] azure-pipelines-1.yml
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\azure-pipelines-1.yml
+--------------------------------------------------------------------------------
+trigger:
+- qa
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  configuration: 'Release'
+  runtime: 'win-x64'
+  targetFramework: 'net9.0'
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: Build
+    displayName: 'Build Job'
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '9.0.x'
+
+    - script: dotnet restore
+      displayName: 'Restore NuGet Packages'
+
+    - script: dotnet publish -c $(configuration) -r $(runtime) -f $(targetFramework) --self-contained -o $(Build.ArtifactStagingDirectory)
+      displayName: 'Publish Application'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: 'drop'
+
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  dependsOn: Build
+  jobs:
+  - deployment: DeployToVM
+    displayName: 'Deploy to Virtual Machine'
+    environment: 'QA' # Nombre del Environment configurado en Azure DevOps
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'drop'
+              downloadPath: '$(System.DefaultWorkingDirectory)'
+
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(System.DefaultWorkingDirectory)/drop'
+              Contents: '**/*'
+              TargetFolder: 'C:\inetpub\wwwroot\BackgroundServices'
+
+          - task: IISWebAppDeploymentOnMachineGroup@0
+            inputs:
+              WebSiteName: 'Default Web Site'
+              WebAppZip: '$(System.DefaultWorkingDirectory)/drop/**/*.zip'
+              RemoveAdditionalFilesFlag: true
+              TakeAppOfflineFlag: true
+              AdditionalArguments: '-allowUntrusted'
+
+================================================================================
+[21] azure-pipelines.yml
+Ruta absoluta: C:\Users\co_wacalderonh\source\repos\BackgroundServices\azure-pipelines.yml
+--------------------------------------------------------------------------------
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
